@@ -12,6 +12,7 @@ package com.ptut.dames.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.ptut.dames.Assets;
+import com.ptut.dames.controller.ControlPlateau;
 import com.ptut.dames.model.Plateau;
 import com.ptut.dames.views.GameRenderer;
 
@@ -31,13 +32,17 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        Plateau plateau; // Can't call the constructor here. Assets have to be
+        Plateau plateau;
+        ControlPlateau controller;
+        // Can't call the constructor here. Assets have to be
         // loaded first.
 
         Assets.loadGame();
+        
         plateau = new Plateau();
         plateau.populate();
-        this.renderer = new GameRenderer(plateau);
+        controller= new ControlPlateau(plateau);
+        this.renderer = new GameRenderer(plateau, controller);
         this.renderer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 

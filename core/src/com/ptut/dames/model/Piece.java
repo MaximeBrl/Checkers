@@ -38,19 +38,19 @@ public class Piece extends Actor {
     protected Array<Coup> coupManger = new Array<Coup>();
     private final TextureRegion textureRegion;
 
-    public Piece(int y, int x, boolean isWhite, String regionName) {
+    public Piece(int y, int x, boolean estBlanc, String regionName) {
         
         this.setBounds(x, y, 1, 1);
-        this.estBlanc = isWhite;
+        this.estBlanc = estBlanc;
         this.textureRegion = Assets.gameAtlas.findRegion(regionName);
 
-        addListener(new InputListener() {
+        /*addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
                 Piece piece = (Piece) event.getListenerActor();
-                System.out.println("test");
+                System.out.println("tes");
                 int tx = (int) piece.getX(); // Tapped tile x.
                 int ty = (int) piece.getY(); // Tapped tile y.
                 System.out.println(tx +" "+ ty);
@@ -61,7 +61,7 @@ public class Piece extends Actor {
                 return true;
             }
 
-        });
+        });*/
     }
 
     public Array<Tile> getDeplacPossible(Plateau plateau, boolean checkFriendly) {

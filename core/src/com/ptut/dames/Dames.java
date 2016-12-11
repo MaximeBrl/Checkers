@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.ptut.dames.screens.FirstPage;
 import com.ptut.dames.screens.GameScreen;
 import com.ptut.dames.screens.JouerIA;
@@ -26,6 +27,7 @@ public class Dames extends Game {
     public SelectGame selectgame;
     public JouerIA jouerIA;
     public JouerJoueur jouerjoueur;
+    
 
     @Override
     public void create() {
