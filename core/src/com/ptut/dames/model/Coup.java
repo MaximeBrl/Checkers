@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ptut.dames.model;
 
 /**
@@ -16,22 +12,21 @@ public class Coup {
 	public boolean continuous;
 
 	/**
-	 * Creates a move. When creating a new <code>Move</code> instance, keep in
-	 * mind that they are created according to white chess pieces. Y coordinate
-	 * inversion for black pieces is done automatically.
+	 *Créer un coup. Les coup sont créé en fonction des pièces Blanche,
+         * pour une pièce noire le coup sera donc inversé automatiquement.
 	 * 
-	 * @param xOffset
-	 *            Horizontal tile offset.
-	 * @param yOffset
-	 *            Vertical tile offset.
-	 * @param continuous
-	 *            If true, than xOffset and yOffset are interpreted as unit
-	 *            vector components which show a direction that can be moved on
-	 *            continuously.
+	 * @param decalageX
+	 *            Décalage tile horizontal
+	 * @param decalageY
+	 *            Décalge tile vertiale
+	 * @param continu
+	 *            Si continu à True alors le déplacement sera interprété par
+         *            un vecteur Vector2() qui permettra de faire un déplacement continu 
+         *            ex: pour les dames.
 	 */
-	public Coup(int xOffset, int yOffset, boolean continuous) {
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
-		this.continuous = continuous;
+	public Coup(int decalageX, int decalageY, boolean continu) {
+		this.xOffset = decalageX;
+		this.yOffset = decalageY;
+		this.continuous = continu;
 	}
 }

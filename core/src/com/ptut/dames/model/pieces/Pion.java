@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ptut.dames.model.pieces;
 
 /**
@@ -15,9 +11,9 @@ import com.ptut.dames.model.Coup;
 
 public class Pion extends Piece {
 
-    public Pion(int x, int y, boolean isWhite) {
-        super(x, y, isWhite, isWhite ? "white-pawn" : "black-pawn");
-        /* Add valid moves. */
+    public Pion(int x, int y, boolean estBlanc) {
+        super(x, y, estBlanc, estBlanc ? "white-pawn" : "black-pawn");
+        /* ajout des déplacements possibles */
 		this.deplacPossible.add(new Coup(1, 1, false));
 		this.deplacPossible.add(new Coup(-1, 1, false));
                 this.deplacPossible.add(new Coup(-1, -1, false));

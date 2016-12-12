@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ptut.dames.model;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -18,8 +14,8 @@ import com.ptut.dames.model.pieces.Pion;
  */
 public class Plateau extends Table {
 
-    public Piece selectedPiece;
-    public int round;
+    public Piece pieceSelect;
+    public int tour;
 
     /* Pointeurs vers les tiles pour accès plus facile */
     private final Tile[][] tiles = new Tile[10][10];
@@ -55,15 +51,15 @@ public class Plateau extends Table {
         }
     }
 
-    public void populate() {
+    public void ajoutPions() {
         /* Ajout des pions */
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j += 2) {
                 if (i % 2 == 0) {
-                    this.addPiece(new Pion(i, j, true));
+                    this.ajoutPieces(new Pion(i, j, true));
 
                 } else {
-                    this.addPiece(new Pion(i, j + 1, true));
+                    this.ajoutPieces(new Pion(i, j + 1, true));
                 }
             }
 
@@ -72,21 +68,21 @@ public class Plateau extends Table {
         for (int i = 6; i < 10; i++) {
             for (int j = 0; j < 10; j += 2) {
                 if (i % 2 == 0) {
-                    this.addPiece(new Pion(i, j, false));
+                    this.ajoutPieces(new Pion(i, j, false));
                 } else {
-                    this.addPiece(new Pion(i, j + 1, false));
+                    this.ajoutPieces(new Pion(i, j + 1, false));
                 }
             }
 
         }
     }
 
-    public void addPiece(Piece piece) {
+    public void ajoutPieces(Piece piece) {
         this.addActor(piece);
         this.pieces[(int) piece.getX()][(int) piece.getY()] = piece;
     }
 
-    public void relocatePieceAt(int xOld, int yOld, int x, int y) {
+    public void repositionnerPiece(int xOld, int yOld, int x, int y) {
         Piece piece = this.pieces[xOld][yOld];
 
         this.pieces[x][y] = piece;
@@ -96,12 +92,12 @@ public class Plateau extends Table {
     }
 
     /**
-     * Removes a piece that is on a given tile location.
+     * Enlève la pièce à la position de la tile donnée
      *
-     * @param x Horizontal index of the tile.
-     * @param y Vertical index of the tile.
+     * @param x position horizontale de la tile
+     * @param y position verticale de la tile
      */
-    public void removePieceAt(int x, int y) {
+    public void enleverPiece(int x, int y) {
         Piece piece = this.pieces[x][y];
 
         if (piece != null) {
@@ -111,9 +107,9 @@ public class Plateau extends Table {
     }
 
     /**
-     * Removes all pieces from the <code>Board<code>.
+     * Enlève toutes les pièces du Plateau
      */
-    public void removeAll() {
+    public void enleverTout() {
 
         for (short x = 0; x < 8; x++) {
 

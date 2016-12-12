@@ -16,27 +16,27 @@ import com.ptut.dames.Assets;
  */
 public class Tile extends Actor {
 
-    public boolean isHighlighted;
+    public boolean estEnSurbrillance;
 
     private final TextureRegion textureRegion;
-    private TextureRegion highlightedTextureRegion;
+    private TextureRegion TextureRegionEnSurbrillance;
 
     /**
-     * Creates a board tile.
+     * Créer une tile pour le Plateau
      *
-     * @param x Horizontal index of the tile.
-     * @param y Vertical index of the tile.
-     * @param isDark Determines whether the tile will be light or dark colored.
+     * @param x position horizontale de la tile
+     * @param y position verticale de la tile
+     * @param estNoir Determine si la tile est noire ou non
      */
-    public Tile(int x, int y, boolean isDark) {
+    public Tile(int x, int y, boolean estNoir) {
         this.setBounds(x, y, 1, 1);
 
-        if (isDark) {
+        if (estNoir) {
             this.textureRegion = Assets.gameAtlas.findRegion("tile-2");
-            this.highlightedTextureRegion = Assets.gameAtlas.findRegion("tile-2-highlighted");
+            this.TextureRegionEnSurbrillance = Assets.gameAtlas.findRegion("tile-2-highlighted");
         } else {
             this.textureRegion = Assets.gameAtlas.findRegion("tile-1");
-            this.highlightedTextureRegion = Assets.gameAtlas
+            this.TextureRegionEnSurbrillance = Assets.gameAtlas
                     .findRegion("tile-1-highlighted");
         }
         
@@ -49,8 +49,8 @@ public class Tile extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        if (this.isHighlighted) {
-            batch.draw(this.highlightedTextureRegion, this.getX(), this.getY(),
+        if (this.estEnSurbrillance) {
+            batch.draw(this.TextureRegionEnSurbrillance, this.getX(), this.getY(),
                     1, 1);
         } else {
             batch.draw(this.textureRegion, this.getX(), this.getY(), 1, 1);

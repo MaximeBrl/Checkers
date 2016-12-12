@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ptut.dames.model;
 
 /**
@@ -18,28 +13,24 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import com.ptut.dames.Assets;
 
-
 public class Piece extends Actor {
-    
+
     public boolean estBlanc;
-    public boolean peutManger = true; // Can this piece capture an enemy
-    // piece using one of its normal
-    // moves?
+    public boolean peutManger = true; // est ce que cette piece peut manger avec un coup?
 
     /**
-     * An array that contains valid moves for the chess piece.
+     * Tableau deplacements valide
      */
     protected Array<Coup> deplacPossible = new Array<Coup>();
 
     /**
-     * An array that contains moves for the chess piece that are valid only when
-     * used for capturing other pieces.
+     * Tableau de coups valide pour manger
      */
     protected Array<Coup> coupManger = new Array<Coup>();
     private final TextureRegion textureRegion;
 
     public Piece(int y, int x, boolean estBlanc, String regionName) {
-        
+
         this.setBounds(x, y, 1, 1);
         this.estBlanc = estBlanc;
         this.textureRegion = Assets.gameAtlas.findRegion(regionName);
@@ -51,8 +42,8 @@ public class Piece extends Actor {
 
                 Piece piece = (Piece) event.getListenerActor();
                 System.out.println("tes");
-                int tx = (int) piece.getX(); // Tapped tile x.
-                int ty = (int) piece.getY(); // Tapped tile y.
+                int tx = (int) piece.getX(); // pos X de la pièce tapée
+                int ty = (int) piece.getY(); // pos y de la pièce tapée
                 System.out.println(tx +" "+ ty);
         
     
@@ -73,10 +64,8 @@ public class Piece extends Actor {
             boolean boucle = true;
 
             for (int i = 1; boucle; i++) {
-                int tx = x + (coup.xOffset * i); // Tile x.
-                int ty = y
-                        + ((this.estBlanc ? coup.yOffset : -coup.yOffset) * i); // Tile
-                // y.
+                int tx = x + (coup.xOffset * i); // pos x tile .
+                int ty = y + ((this.estBlanc ? coup.yOffset : -coup.yOffset) * i); // pos y tile
 
                 if ((tx > -1) && (tx < 8) && (ty > -1) && (ty < 8)) {
                     Tile tile = plateau.getTilePos(tx, ty);
@@ -105,29 +94,28 @@ public class Piece extends Actor {
     }
 
     /**
-     * Returns tiles on a board that can be accessed by this
-	 * <code>Piece<code> instance according to its <code>captureOnlyMoves</code>
-     * array.
+     * Retourne les tile sur la Plateau qui sont accessible par cette
+	 * <code>Piece<code>  en fonction de son tableau <code>coupManger</code>
      *
-     * @param plateau The <code>Board</code> instance to fetch tiles from.
-     * @param check Check the validity of the capturing move before adding the
-     * tile to the list. e.g: If a capturable piece is present.
-     * @return Resulting tile array.
+     *
+     * @param plateau instance du plateau
+     * @param verif verifie la validitée du coup pour manger avant d'ajouter la
+     * tile à la liste
+     * @return tableau des tile
      */
-    public Array<Tile> getTilesManger(Plateau plateau, boolean check) {
+    public Array<Tile> getTilesManger(Plateau plateau, boolean verif) {
         Array<Tile> tiles = new Array<Tile>();
         int x = (int) this.getX();
         int y = (int) this.getY();
 
         for (Coup coup : this.coupManger) {
-            int tx = x + coup.xOffset; // Tile x.
-            int ty = y + (this.estBlanc ? coup.yOffset : -coup.yOffset); // Tile
-            // y.
+            int tx = x + coup.xOffset; // pos x tile
+            int ty = y + (this.estBlanc ? coup.yOffset : -coup.yOffset); // pos y tile
             if ((tx > -1) && (tx < 8) && (ty > -1) && (ty < 8)) {
                 Tile tile = plateau.getTilePos(tx, ty);
                 Piece autrepiece = plateau.getPiecePos(tx, ty);
 
-                if (!check
+                if (!verif
                         || ((autrepiece != null) && (autrepiece.estBlanc != this.estBlanc))) {
                     tiles.add(tile);
                 }

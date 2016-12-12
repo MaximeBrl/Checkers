@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ptut.dames.controller;
 
 /**
@@ -25,59 +20,51 @@ import com.ptut.dames.model.pieces.Pion;
 import com.ptut.dames.views.GameRenderer;
 
 public class ControlPlateau extends ActorGestureListener implements GestureListener {
-    static final Vector2 tmpCoords = new Vector2(), tmpCoords2 = new Vector2();
 
-	
-	InputEvent event;
-	Actor actor, touchDownTarget;
-   
     private final Plateau plateau;
-    private final Array<Tile> highlightedTiles = new Array<Tile>();
+    private final Array<Tile> tileEnSurbrillance = new Array<Tile>();
     private GameRenderer view = null;
+    public InputEvent event;
 
     public ControlPlateau(Plateau plateau) {
 
         this.plateau = plateau;
     }
 
-   
-    
-
-        
-        private void movePiece(Piece piece, int x, int y) {
-        /* Check move validity. */
-        if ((piece == null) || !this.plateau.getTilePos(x, y).isHighlighted) {
+    private void deplacerPiece(Piece piece, int x, int y) {
+        /* vérifier validitée du déplacement */
+        if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
             return;
         }
 
         int xOld = (int) piece.getX();
         int yOld = (int) piece.getY();
 
-        /* Remove highlights. */
-        this.removeMoveHighlights();
+        /* enlever la surbrillance */
+        this.enleverSurbrillanceDeplacement();
 
-        /* Capture. */
+        /* Pièce mangée */
         if (this.plateau.getPiecePos(x, y) != null) {
-            this.plateau.removePieceAt(x, y);
+            this.plateau.enleverPiece(x, y);
         }
 
-        /* Move. */
-        this.plateau.relocatePieceAt(xOld, yOld, x, y);
-        this.plateau.selectedPiece.moved();
+        /* Pièce déplacée */
+        this.plateau.repositionnerPiece(xOld, yOld, x, y);
+        this.plateau.pieceSelect.moved();
 
-        /* Deselect and advance round. */
-        this.plateau.selectedPiece = null;
-        this.plateau.round++;
+        /* désectionner piece et passer au tour suivant */
+        this.plateau.pieceSelect = null;
+        this.plateau.tour++;
 
     }
 
     private void selectPiece(Piece piece) {
-        this.removeMoveHighlights();
-        this.plateau.selectedPiece = piece;
-        this.addMoveHighlightsForPiece(piece);
+        this.enleverSurbrillanceDeplacement();
+        this.plateau.pieceSelect = piece;
+        this.ajouterSurbrillanceDeplacement(piece);
     }
 
-    private void addMoveHighlightsForPiece(Piece piece) {
+    private void ajouterSurbrillanceDeplacement(Piece piece) {
         Array<Tile> tiles = piece.getDeplacPossible(this.plateau, true);
 
         tiles.addAll(piece.getTilesManger(this.plateau, true));
@@ -89,10 +76,10 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         }
     }
 
-    private void removeMoveHighlights() {
+    private void enleverSurbrillanceDeplacement() {
 
-        while (this.highlightedTiles.size > 0) {
-            this.highlightedTiles.pop().isHighlighted = false;
+        while (this.tileEnSurbrillance.size > 0) {
+            this.tileEnSurbrillance.pop().estEnSurbrillance = false;
         }
     }
 
@@ -100,15 +87,11 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         this.view = view;
     }
 
-    
-
     @Override
     public boolean tap(float x, float y, int count, int button) {
         System.out.println("test22222");
         return false;
     }
-
-   
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
@@ -148,32 +131,34 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
-         Actor target = event.getTarget();
-        int tx = (int) target.getX(); // Tapped tile x.
-        int ty = (int) target.getY(); // Tapped tile y.
+        Actor cible = event.getTarget();
+        int tx = (int) cible.getX(); // pos x tile cliquée
+        int ty = (int) cible.getY(); // pos y tile cliquée
         System.out.println("touch");
-        System.out.println(tx+" "+ty);
-        if (target.getClass().getSuperclass().equals(Piece.class
-        )) {System.out.println("piece");
-            Piece piece = (Piece) target;
-            
-            if ((((this.plateau.round % 2) == 0) && piece.estBlanc)
-                    || (((this.plateau.round % 2) == 1) && !piece.estBlanc)) {
+        System.out.println(tx + " " + ty);
+        
+        //si la cible est une Piece
+        if (cible.getClass().getSuperclass().equals(Piece.class)) { 
+            System.out.println("piece");
+            Piece piece = (Piece) cible; // on transforme l'acteur en Pièce
+
+            if ((((this.plateau.tour % 2) == 0) && piece.estBlanc)
+                    || (((this.plateau.tour % 2) == 1) && !piece.estBlanc)) {
                 this.selectPiece(piece);
             } else {
-                this.movePiece(this.plateau.selectedPiece, tx, ty);
+                this.deplacerPiece(this.plateau.pieceSelect, tx, ty);
             }
         } else {
-            this.movePiece(this.plateau.selectedPiece, tx, ty);
+            this.deplacerPiece(this.plateau.pieceSelect, tx, ty);
         }
         return true;
-        
+
     }
 
     @Override
     public boolean longPress(float x, float y) {
         return false;
-        
+
     }
 
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ptut.dames.views;
 
 /**
@@ -12,22 +8,22 @@ package com.ptut.dames.views;
 public interface Renderer {
 
     /**
-     * Should be called when rendering needs to be done.
+     * Doit etre appelé quand un rendu doit etre fait
      *
-     * @param delta The time in seconds since the last render.
+     * @param delta temps en seconde depuis le dernier rendu
      */
     public void render(float delta);
 
     /**
-     * Should be called when device screen is resized.
+     * 
      *
-     * @param width The new width in pixels.
-     * @param height The new height in pixels.
+     * @param width nouvelle largeur en px
+     * @param height nouvelle hauteur en px
      */
     public void setSize(int width, int height);
 
     /**
-     * Should be called when the renderer needs to release all resources.
+     * doit etre appelé quand le render doit relaché les ressources
      */
     public void dispose();
 }
