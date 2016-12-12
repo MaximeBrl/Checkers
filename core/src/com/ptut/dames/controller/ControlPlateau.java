@@ -21,10 +21,11 @@ import com.ptut.dames.views.GameRenderer;
 
 public class ControlPlateau extends ActorGestureListener implements GestureListener {
 
+    private float Cx = 0;
+    private float Cy = 0;
     private final Plateau plateau;
     private final Array<Tile> tileEnSurbrillance = new Array<Tile>();
     private GameRenderer view = null;
-    public InputEvent event;
 
     public ControlPlateau(Plateau plateau) {
 
@@ -89,49 +90,76 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        System.out.println("test22222");
+
         return false;
     }
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        System.out.println("test44444");
+
         return false;
     }
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        System.out.println("test55555");
+
         return false;
     }
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        System.out.println("test66666");
+
         return false;
     }
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        System.out.println("test77777");
+
         return false;
     }
 
     @Override
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-        System.out.println("test8888888");
+
         return false;
     }
 
     @Override
     public void pinchStop() {
-        System.out.println("test9999999");
 
     }
 
     @Override
-    public boolean touchDown(float x, float y, int pointer, int button) {
-        Actor cible = event.getTarget();
+    public boolean touchDown(float Cx, float Cy, int pointer, int button) {
+        this.Cx = Cx;
+        this.Cy = Cy;
+
+        System.out.println(Cx + "    " + Cy);
+        this.ConvertCoord();
+        return true;
+    }
+
+    public float ConvertCoord() {
+        int i = 0;
+        int x = 0;
+        int y = 0;
+        int Ox = 150;
+        int Oy = 599;
+        while (i <= 9) {
+            if (Cx > Ox + i * 59) {
+                x = i;
+            }
+            if (Cy < Oy - i * 59) {
+                y = i;
+            }
+            i++;
+        }
+        System.out.println(x + "    " + y);
+        return Cx+Cy;
+        
+    }
+
+    /*Actor cible = event.getTarget(); // recupere la cible qui à recu l'evenement: celle cliquée
         int tx = (int) cible.getX(); // pos x tile cliquée
         int ty = (int) cible.getY(); // pos y tile cliquée
         System.out.println("touch");
@@ -153,11 +181,26 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         }
         return true;
 
-    }
+    }*/
 
     @Override
     public boolean longPress(float x, float y) {
         return false;
+
+    }
+
+    /* -on recupere des coordonnées px, getter
+       -transformer les coordonées px en coordonée entiere pour chaque case
+       --> largeur d'une case = hauteur d'une case
+            clic(cx,cy)--> coordonées en px cliquée; o(ox,oy) 
+            (cx-ox, cy-oy)
+            (cx-ox) / largeur (division entière)
+    
+       
+       -detecter case cliquée, récupérer coordonées
+       -faire le déplacementsur sur la case cliquée   
+     */
+    public void ConvertCoord(float x, float y) {
 
     }
 
