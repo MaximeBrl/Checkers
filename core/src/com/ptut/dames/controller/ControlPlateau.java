@@ -141,10 +141,10 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     public float ConvertCoord() {
         int i = 0;
-        int x = 0;
-        int y = 0;
-        int Ox = 150;
-        int Oy = 599;
+        int x = 0;                  //la coordonée entière X de la case
+        int y = 0;                  //la coordonée entière Y de la case
+        int Ox = 150;               //origine X en pixel
+        int Oy = 599;               //origine Y en pixel
         while (i <= 9) {
             if (Cx > Ox + i * 59) {
                 x = i;
@@ -154,9 +154,18 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
             }
             i++;
         }
+        if (Cx < Ox) {              //si on dépasse le damier a gauche
+            x = -1;
+            y = -1;
+        }
+        if (Cx > Ox + 10 * 59) {    //si on dépasse le damier à droite
+            x = -1;
+            y = -1;
+        }
+
         System.out.println(x + "    " + y);
-        return Cx+Cy;
-        
+        return Cx + Cy;
+
     }
 
     /*Actor cible = event.getTarget(); // recupere la cible qui à recu l'evenement: celle cliquée
@@ -182,23 +191,17 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         return true;
 
     }*/
-
     @Override
     public boolean longPress(float x, float y) {
         return false;
 
     }
 
-    /* -on recupere des coordonnées px, getter
-       -transformer les coordonées px en coordonée entiere pour chaque case
-       --> largeur d'une case = hauteur d'une case
-            clic(cx,cy)--> coordonées en px cliquée; o(ox,oy) 
-            (cx-ox, cy-oy)
-            (cx-ox) / largeur (division entière)
-    
-       
-       -detecter case cliquée, récupérer coordonées
-       -faire le déplacementsur sur la case cliquée   
+    /* -detecter case cliquée, récupérer coordonées
+       -verifier si il y a une pièce sur la case
+       -select
+       -nouveau clic, recupérer coord
+       -déplacer sur case cliquée
      */
     public void ConvertCoord(float x, float y) {
 
