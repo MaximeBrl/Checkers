@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Array;
 import com.ptut.dames.model.Plateau;
 import com.ptut.dames.model.Piece;
+import static com.ptut.dames.model.Plateau.pieces;
 import com.ptut.dames.model.Tile;
 import com.ptut.dames.model.pieces.Pion;
 import com.ptut.dames.views.GameRenderer;
@@ -34,20 +35,20 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     private void deplacerPiece(Piece piece, int x, int y) {
         /* vérifier validitée du déplacement */
-        if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
+        /*if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
             return;
-        }
+        }*/
 
         int xOld = (int) piece.getX();
         int yOld = (int) piece.getY();
 
         /* enlever la surbrillance */
-        this.enleverSurbrillanceDeplacement();
+       /* this.enleverSurbrillanceDeplacement();
 
         /* Pièce mangée */
-        if (this.plateau.getPiecePos(x, y) != null) {
+       /* if (this.plateau.getPiecePos(x, y) != null) {
             this.plateau.enleverPiece(x, y);
-        }
+        }*/
 
         /* Pièce déplacée */
         this.plateau.repositionnerPiece(xOld, yOld, x, y);
@@ -133,13 +134,47 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
     public boolean touchDown(float Cx, float Cy, int pointer, int button) {
         this.Cx = Cx;
         this.Cy = Cy;
-        
+        int i = 0;
+        int x = 0;
+        int y = 0;
+        int Ox = 150;               //origine X en pixel
+        int Oy = 599;
         System.out.println(Cx + "    " + Cy);
-        this.ConvertCoord();
+                    //origine Y en pixel
+        while (i <= 9) {
+            if (Cx > Ox + i * 59) {
+                x = i;
+            }
+            if (Cy < Oy - i * 59) {
+                y = i;
+            }
+            i++;
+        }
+        if (Cx < Ox) {              //si on dépasse le damier a gauche
+            x = -1;
+            y = -1;
+        }
+        if (Cx > Ox + 10 * 59) {    //si on dépasse le damier à droite
+           x = -1;
+           y = -1;
+        }
+         Cx = x;
+         Cy = y;
+         Cx= (int)Cx;
+         Cy= (int)Cy;
+        System.out.println(Cx + "   okokok   " + Cy);
+      
+        Piece cible = pieces[(int)Cx][(int)Cy];
+        int tx =(int) cible.getX();
+        int ty =(int) cible.getY();
+        System.out.println("tx= "+tx+"  ty= "+ty);
+        this.selectPiece(cible);
+        this.deplacerPiece(cible,6,4);
+        
         return true;
     }
 
-    public float ConvertCoord() {
+   /* public float ConvertCoord() {
         int i = 0;
         int x = 0;                  //la coordonée entière X de la case
         int y = 0;                  //la coordonée entière Y de la case
@@ -165,10 +200,16 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
         System.out.println(x + "    " + y);
         
-        return Cx + Cy;
+        return (int)Cx + (int)Cy;
 
-    }
+    }*/
 
+    /*public void pieceSelectionnee(){
+        Actor cible = pieces[(int)Cx][(int)Cy];
+        int tx =(int) cible.getX();
+        int ty =(int) cible.getY();
+        System.out.println("tx= "+tx+"  ty= "+ty);
+    }*/
     /*Actor cible = event.getTarget(); // recupere la cible qui à recu l'evenement: celle cliquée
         int tx = (int) cible.getX(); // pos x tile cliquée
         int ty = (int) cible.getY(); // pos y tile cliquée
