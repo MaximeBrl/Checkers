@@ -15,10 +15,16 @@ import com.ptut.dames.views.GameRenderer;
 public class GameScreen implements Screen {
 
     private GameRenderer renderer;
+    public static String couleur1, couleur2, nom1, nom2;
+    
+    
+
+
 
     @Override
     public void render(float delta) {
         this.renderer.render(delta);
+       
     }
 
     @Override

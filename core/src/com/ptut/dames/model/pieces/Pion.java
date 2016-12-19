@@ -11,8 +11,10 @@ import com.ptut.dames.model.Coup;
 
 public class Pion extends Piece {
 
-    public Pion(int x, int y, boolean estBlanc) {
-        super(x, y, estBlanc, estBlanc ? "white-pawn" : "black-pawn");
+    public Pion(int x, int y, boolean estBlanc, String couleur) {
+       
+        super(x, y, estBlanc, couleur);
+        
         /* ajout des déplacements possibles */
 		this.deplacPossible.add(new Coup(1, 1, false));
 		this.deplacPossible.add(new Coup(-1, 1, false));

@@ -32,12 +32,12 @@ public class Tile extends Actor {
         this.setBounds(x, y, 1, 1);
 
         if (estNoir) {
-            this.textureRegion = Assets.gameAtlas.findRegion("tile-2");
-            this.TextureRegionEnSurbrillance = Assets.gameAtlas.findRegion("tile-2-highlighted");
+            this.textureRegion = Assets.gameAtlas.findRegion("carrenoir");
+            this.TextureRegionEnSurbrillance = Assets.gameAtlas.findRegion("carrenoir");
         } else {
-            this.textureRegion = Assets.gameAtlas.findRegion("tile-1");
+            this.textureRegion = Assets.gameAtlas.findRegion("carreblanc");
             this.TextureRegionEnSurbrillance = Assets.gameAtlas
-                    .findRegion("tile-1-highlighted");
+                    .findRegion("carreblanc");
         }
         
         

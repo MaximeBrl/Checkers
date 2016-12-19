@@ -33,8 +33,12 @@ public class Piece extends Actor {
 
         this.setBounds(x, y, 1, 1);
         this.estBlanc = estBlanc;
+        if(regionName.equals("Bleu")) regionName="pionbleu";
+        if(regionName.equals("Vert")) regionName="pionvert";
+        if(regionName.equals("Rouge")) regionName="pionrouge";
         this.textureRegion = Assets.gameAtlas.findRegion(regionName);
-
+       
+    }
         /*addListener(new InputListener() {
 
             @Override
@@ -53,7 +57,7 @@ public class Piece extends Actor {
             }
 
         });*/
-    }
+    
 
     public Array<Tile> getDeplacPossible(Plateau plateau, boolean checkFriendly) {
         Array<Tile> tiles = new Array<Tile>();

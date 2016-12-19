@@ -14,7 +14,7 @@ public class Assets {
 
     /* Charge tous les élélents graphiques tel que les Textures, nécessaires au jeu*/
     public static void loadGame() {
-        gameAtlas = new TextureAtlas(Gdx.files.internal("atlases/open-chess-atlas.atlas"));
+        gameAtlas = new TextureAtlas(Gdx.files.internal("atlases/creatpackage/pions_damiers.pack"));
     }
     
     public static void disposeGame() {

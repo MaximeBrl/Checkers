@@ -16,8 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.ptut.dames.Dames;
+import static com.ptut.dames.screens.JouerJoueur.nomJ1;
 
 /**
  *
@@ -30,12 +32,12 @@ public class JouerIA implements Screen {
     private Stage stage;
     Skin skinneon;
     OrthographicCamera camera;
-    TextField nomJ1;
-    TextField nomIA;
+    static TextField nomJ1;
+    static TextField nomIA;
     Label difficulte;
     SelectBox diff;
-    SelectBox choixcouleur;
-    SelectBox choixcouleur2;
+    static SelectBox  choixcouleur;
+    static SelectBox choixcouleur2;
     TextButton menu;
     TextButton play;
     
@@ -158,9 +160,20 @@ public class JouerIA implements Screen {
     }
     
     
-//    public String getIA(){
-//       return nomJ1.getText();
-//    }
+    public static ArraySelection getColor1(){
+       return choixcouleur.getSelection();
+    }
+    
+    public static ArraySelection getColor2(){
+       return choixcouleur2.getSelection();
+    }
+    
+      public static String getnomJ1(){
+       return nomJ1.getText();
+    }
+    public static String getnomJ2(){
+       return nomIA.getText();
+    }
     
 }
 

@@ -16,9 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import com.ptut.dames.Dames;
+import static com.ptut.dames.screens.JouerIA.choixcouleur;
 
 /**
  *
@@ -31,14 +33,14 @@ public class JouerJoueur implements Screen {
     private Stage stage;
     Skin skinneon;
     OrthographicCamera camera;
-    TextField nomJ1;
-    TextField nomJ2;
+    static TextField nomJ1;
+    static TextField nomJ2;
     Label difficulte;
     SelectBox diff;
     TextButton menu;
     TextButton play;
-    SelectBox choixcouleur;
-    SelectBox choixcouleur2;
+    static SelectBox choixcouleur;
+    static SelectBox choixcouleur2;
     String[] choixTexture;
     String[] choixTexture2;
     
@@ -104,7 +106,7 @@ public class JouerJoueur implements Screen {
          play.addListener(new ClickListener(){
        @Override
        public void clicked(InputEvent event, float x, float y) {
-           app.setScreen(app.gamescreen);
+          app.setScreen(app.gamescreen);
            
            
          //   ScreenGame nouv = new ScreenGame(app,nomJ1.getText(),nomJ2.getText(),choixcouleur.getSelection(), choixcouleur2.getSelection());
@@ -155,6 +157,21 @@ public class JouerJoueur implements Screen {
     public void dispose() {
         skinneon.dispose();
         stage.dispose();
+    }
+    
+    public static ArraySelection getColor1(){
+       return choixcouleur.getSelection();
+    }
+    
+    public static ArraySelection getColor2(){
+       return choixcouleur2.getSelection();
+    }
+    
+    public static String getnomJ1(){
+       return nomJ1.getText();
+    }
+    public static String getnomJ2(){
+       return nomJ2.getText();
     }
 }
 

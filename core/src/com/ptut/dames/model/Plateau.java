@@ -7,6 +7,8 @@ import com.ptut.dames.Dames;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.ptut.dames.model.pieces.Pion;
+import com.ptut.dames.screens.GameScreen;
+import com.ptut.dames.screens.JouerIA;
 
 /**
  *
@@ -56,10 +58,10 @@ public class Plateau extends Table {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j += 2) {
                 if (i % 2 == 0) {
-                    this.ajoutPieces(new Pion(i, j, true));
+                    this.ajoutPieces(new Pion(i, j, true, (String) JouerIA.getColor1().first()));
 
                 } else {
-                    this.ajoutPieces(new Pion(i, j + 1, true));
+                    this.ajoutPieces(new Pion(i, j+1, true, (String) JouerIA.getColor1().first()));
                 }
             }
 
@@ -68,9 +70,9 @@ public class Plateau extends Table {
         for (int i = 6; i < 10; i++) {
             for (int j = 0; j < 10; j += 2) {
                 if (i % 2 == 0) {
-                    this.ajoutPieces(new Pion(i, j, false));
+                    this.ajoutPieces(new Pion(i, j, false, (String) JouerIA.getColor2().first()));
                 } else {
-                    this.ajoutPieces(new Pion(i, j + 1, false));
+                    this.ajoutPieces(new Pion(i, j + 1, false, (String) JouerIA.getColor2().first()));
                 }
             }
 

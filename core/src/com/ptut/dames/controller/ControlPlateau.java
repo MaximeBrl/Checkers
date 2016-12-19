@@ -133,7 +133,7 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
     public boolean touchDown(float Cx, float Cy, int pointer, int button) {
         this.Cx = Cx;
         this.Cy = Cy;
-
+        
         System.out.println(Cx + "    " + Cy);
         this.ConvertCoord();
         return true;
@@ -164,6 +164,7 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         }
 
         System.out.println(x + "    " + y);
+        
         return Cx + Cy;
 
     }
