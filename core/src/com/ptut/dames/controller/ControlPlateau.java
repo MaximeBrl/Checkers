@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.ptut.dames.model.Plateau;
 import com.ptut.dames.model.Piece;
 import static com.ptut.dames.model.Plateau.pieces;
+import static com.ptut.dames.model.Plateau.tiles;
 import com.ptut.dames.model.Tile;
 import com.ptut.dames.model.pieces.Pion;
 import com.ptut.dames.views.GameRenderer;
@@ -35,28 +36,32 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     private void deplacerPiece(Piece piece, int x, int y) {
         /* vérifier validitée du déplacement */
-        /*if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
+ /*if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
             return;
         }*/
-
+        System.out.println("piece move1");
         int xOld = (int) piece.getX();
         int yOld = (int) piece.getY();
-
+        System.out.println("piece move2");
         /* enlever la surbrillance */
-       /* this.enleverSurbrillanceDeplacement();
+ /* this.enleverSurbrillanceDeplacement();
 
         /* Pièce mangée */
-       /* if (this.plateau.getPiecePos(x, y) != null) {
+ /* if (this.plateau.getPiecePos(x, y) != null) {
             this.plateau.enleverPiece(x, y);
         }*/
 
-        /* Pièce déplacée */
+ /* Pièce déplacée */
         this.plateau.repositionnerPiece(xOld, yOld, x, y);
+        System.out.println("piece move3");
         this.plateau.pieceSelect.moved();
+        System.out.println("piece move4");
 
         /* désectionner piece et passer au tour suivant */
         this.plateau.pieceSelect = null;
+        System.out.println("piece move5");
         this.plateau.tour++;
+        System.out.println("piece move6");
 
     }
 
@@ -64,6 +69,7 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         this.enleverSurbrillanceDeplacement();
         this.plateau.pieceSelect = piece;
         this.ajouterSurbrillanceDeplacement(piece);
+        System.out.println("piece select");
     }
 
     private void ajouterSurbrillanceDeplacement(Piece piece) {
@@ -139,8 +145,8 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         int y = 0;
         int Ox = 150;               //origine X en pixel
         int Oy = 599;
-        System.out.println(Cx + "    " + Cy);
-                    //origine Y en pixel
+        //System.out.println(Cx + " test 1   " + Cy);
+        //origine Y en pixel
         while (i <= 9) {
             if (Cx > Ox + i * 59) {
                 x = i;
@@ -155,26 +161,58 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
             y = -1;
         }
         if (Cx > Ox + 10 * 59) {    //si on dépasse le damier à droite
-           x = -1;
-           y = -1;
+            x = -1;
+            y = -1;
         }
-         Cx = x;
-         Cy = y;
-         Cx= (int)Cx;
-         Cy= (int)Cy;
-        System.out.println(Cx + "   okokok   " + Cy);
-      
-        Piece cible = pieces[(int)Cx][(int)Cy];
-        int tx =(int) cible.getX();
-        int ty =(int) cible.getY();
-        System.out.println("tx= "+tx+"  ty= "+ty);
-        this.selectPiece(cible);
-        this.deplacerPiece(cible,6,4);
-        
+        Cx = x;
+        Cy = y;
+        Cx = (int) Cx;
+        Cy = (int) Cy;
+        //System.out.println(Cx + "   test 2   " + Cy);
+
+        // Actor ciblepiece = pieces[(int)Cx][(int)Cy];
+        Actor cibletile = tiles[(int) Cx][(int) Cy];
+
+        //int px = (int) ciblepiece.getX(); //pos x piece cliquée 
+        //int py = (int) ciblepiece.getY(); // pos y piece cliquée   
+        int tx = (int) cibletile.getX(); // pos x tile cliquée
+        int ty = (int) cibletile.getY(); // pos y tile cliquée
+
+        System.out.println(tx + "    " + ty);
+        boolean select = false;
+        if (pieces[tx][ty] != null) {
+            System.out.println("il y a une piece ici");
+            Piece piece = pieces[tx][ty]; // on transforme l'acteur en Pièce
+            this.selectPiece(piece);
+            select = true;
+            
+            if (select = true) {
+                 
+            this.deplacerPiece(this.plateau.pieceSelect, (int) Cx, (int) Cy);
+                    
+            }
+
+        }
+
+        //System.out.println(px + "   test 4   " + py);
+        //si la cible est une Piece
+        /* if (cible.getClass().getSuperclass().equals(Piece.class)) { 
+            System.out.println("piece");
+            Piece piece = (Piece) cible; // on transforme l'acteur en Pièce
+
+            if ((((this.plateau.tour % 2) == 0) && piece.estBlanc)
+                    || (((this.plateau.tour % 2) == 1) && !piece.estBlanc)) {
+                this.selectPiece(piece);
+            } else {
+                this.deplacerPiece(this.plateau.pieceSelect, tx, ty);
+            }
+        } else {
+            this.deplacerPiece(this.plateau.pieceSelect, tx, ty);
+        }*/
         return true;
     }
 
-   /* public float ConvertCoord() {
+    /* public float ConvertCoord() {
         int i = 0;
         int x = 0;                  //la coordonée entière X de la case
         int y = 0;                  //la coordonée entière Y de la case
@@ -204,13 +242,13 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     }*/
 
-    /*public void pieceSelectionnee(){
+ /*public void pieceSelectionnee(){
         Actor cible = pieces[(int)Cx][(int)Cy];
         int tx =(int) cible.getX();
         int ty =(int) cible.getY();
         System.out.println("tx= "+tx+"  ty= "+ty);
     }*/
-    /*Actor cible = event.getTarget(); // recupere la cible qui à recu l'evenement: celle cliquée
+ /*Actor cible = event.getTarget(); // recupere la cible qui à recu l'evenement: celle cliquée
         int tx = (int) cible.getX(); // pos x tile cliquée
         int ty = (int) cible.getY(); // pos y tile cliquée
         System.out.println("touch");

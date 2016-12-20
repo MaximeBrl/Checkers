@@ -20,7 +20,7 @@ public class Plateau extends Table {
     public int tour;
 
     /* Pointeurs vers les tiles pour accès plus facile */
-    private final Tile[][] tiles = new Tile[10][10];
+    public static final Tile[][] tiles = new Tile[10][10];
 
     /* Pointeurs vers les pieces pour accès plus facile */
     public static final Piece[][] pieces = new Piece[10][10];
