@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.ptut.dames.Dames;
+import com.ptut.dames.model.Plateau;
+import static com.ptut.dames.screens.JouerIA.plateau;
 import static com.ptut.dames.screens.JouerJoueur.nomJ1;
 
 /**
@@ -40,8 +42,9 @@ public class JouerIA implements Screen {
     static SelectBox choixcouleur2;
     TextButton menu;
     TextButton play;
+    static Plateau plateau;
+
     
- 
             
     public JouerIA(Dames app){
         this.app = app;
@@ -107,8 +110,10 @@ public class JouerIA implements Screen {
        play.addListener(new ClickListener(){
        @Override
        public void clicked(InputEvent event, float x, float y) {
+           Dames.setJouercontreIA(true);
            app.setScreen(app.gamescreen);
-                   
+           
+           
           //  ScreenGame nouv = new ScreenGame(app,nomJ1.getText(),nomIA.getText(),choixcouleur.getSelection(), choixcouleur2.getSelection());
           //  app.setScreen(nouv);
             
@@ -175,6 +180,9 @@ public class JouerIA implements Screen {
        return nomIA.getText();
     }
     
-}
+     public static Plateau getPlateau() {
+        return plateau;
+    }
+ }
 
 

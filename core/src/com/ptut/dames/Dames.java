@@ -27,6 +27,10 @@ public class Dames extends Game {
     public SelectGame selectgame;
     public JouerIA jouerIA;
     public JouerJoueur jouerjoueur;
+    static boolean jouercontrejoueur = false;
+    static boolean jouercontreIA = false;
+
+    
     
 
     @Override
@@ -41,5 +45,21 @@ public class Dames extends Game {
         jouerjoueur = new JouerJoueur(this);
 
         this.setScreen(firstpage);
+    }
+    
+    public static boolean getJouercontrejoueur() {
+        return jouercontrejoueur;
+    }
+
+    public static boolean getJouercontreIA() {
+        return jouercontreIA;
+    }
+
+    public static void setJouercontrejoueur(boolean jouercontrejoueur) {
+        Dames.jouercontrejoueur = jouercontrejoueur;
+    }
+
+    public static void setJouercontreIA(boolean jouercontreIA) {
+        Dames.jouercontreIA = jouercontreIA;
     }
 }

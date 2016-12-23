@@ -106,6 +106,7 @@ public class JouerJoueur implements Screen {
          play.addListener(new ClickListener(){
        @Override
        public void clicked(InputEvent event, float x, float y) {
+           Dames.setJouercontrejoueur(true);
           app.setScreen(app.gamescreen);
            
            

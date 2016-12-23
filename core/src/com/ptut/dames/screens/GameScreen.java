@@ -7,6 +7,10 @@ package com.ptut.dames.screens;
  */
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.ptut.dames.Assets;
 import com.ptut.dames.controller.ControlPlateau;
 import com.ptut.dames.model.Plateau;
@@ -16,35 +20,60 @@ public class GameScreen implements Screen {
 
     private GameRenderer renderer;
     public static String couleur1, couleur2, nom1, nom2;
-    
-    
-
-
+    Stage stage;
+     Skin skinneon;
+     OrthographicCamera camera;
+     TextButton menu;
+     
+   
+     public GameScreen(){
+         stage = new Stage();
+          skinneon = new Skin(Gdx.files.internal("neonui/neonui/neon-ui.json" ));
+        menu = new TextButton("menu", skinneon);
+        camera=new OrthographicCamera();
+         stage.getViewport().setCamera(camera);
+        
+     }
 
     @Override
     public void render(float delta) {
-        this.renderer.render(delta);
        
+        this.renderer.render(delta);
+        stage.act();
+        stage.draw();
+        
+        
     }
 
     @Override
     public void resize(int width, int height) {
+     
         this.renderer.setSize(width, height);
+            
+       
+        
     }
 
     @Override
     public void show() {
+         Gdx.input.setInputProcessor(stage);
         Plateau plateau;
         ControlPlateau controller;
         
-
-        Assets.loadGame();
+       
         
+        Assets.loadGame();
+   
         plateau = new Plateau();
         plateau.ajoutPions();
-        controller= new ControlPlateau(plateau);
-        this.renderer = new GameRenderer(plateau, controller);
+         controller= new ControlPlateau(plateau);
+         
+          this.renderer = new GameRenderer(plateau, controller);
         this.renderer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        menu.setPosition(850,550);
+        stage.addActor(menu);
+        
+        
     }
 
     @Override
@@ -63,6 +92,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        
     } 
 
 }
