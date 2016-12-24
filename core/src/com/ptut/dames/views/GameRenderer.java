@@ -56,7 +56,7 @@ public class GameRenderer implements Renderer {
     public void render(float delta) {
         Plateau plateau = new Plateau();
        
-        Gdx.gl.glClearColor(.3f, .3f, .4f, 1);
+        Gdx.gl.glClearColor(.0f, .3f, .4f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         this.stage.draw();
         multiplexer.addProcessor(stage);

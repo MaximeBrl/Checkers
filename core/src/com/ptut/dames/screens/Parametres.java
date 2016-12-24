@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.ptut.dames.Dames;
 import static com.ptut.dames.screens.JouerJoueur.choixcouleur;
@@ -25,7 +26,7 @@ import static com.ptut.dames.screens.JouerJoueur.choixcouleur;
 public class Parametres implements Screen {
 
     Dames app;
-    SelectBox damier1,damier2;
+    static SelectBox damier1,damier2;
     Label titre1, titre2;
     Skin skinneon;
     Stage stage;
@@ -35,6 +36,8 @@ public class Parametres implements Screen {
     Texture affichageDamier;
     Texture affichageDamier2;
     TextButton valider;
+
+    
     
 
     public Parametres(Dames app) {
@@ -62,8 +65,8 @@ public class Parametres implements Screen {
         table.setSize(900, 600);
         table.setPosition(0, 0);
         
-        String[] choixDamier1 = new String[]{"Noir", "Bleu", "Gris", "Violet", "Blanc"};
-        String[] choixDamier2 = new String[]{"Blanc", "Bleu", "Gris", "Violet", "Noir"};
+        String[] choixDamier1 = new String[]{"Noir", "Bleu neon", "Gris", "Marron", "Blanc", "Noir neon", "Rouge"};
+        String[] choixDamier2 = new String[]{"Blanc", "Bleu neon", "Gris", "Marron", "Noir", "Noir neon", "Rouge"};
 
         damier1.setItems(choixDamier1);
         damier2.setItems(choixDamier2);
@@ -134,6 +137,14 @@ public class Parametres implements Screen {
         
     }
     
+    public static ArraySelection getDamier1() {
+        return damier1.getSelection();
+    }
+
+    public static ArraySelection getDamier2() {
+        return damier2.getSelection();
+    }
+
     public void conditionAffichage(){
         if(damier1.getSelection().first() == "Noir"){
             affichageDamier = new Texture("atlases/atlas_test/carrenoir.png");
@@ -141,15 +152,21 @@ public class Parametres implements Screen {
         if(damier1.getSelection().first() == "Blanc"){
             affichageDamier = new Texture("atlases/atlas_test/carreblanc.png");
         }
-        if(damier1.getSelection().first() == "Bleu"){
-            affichageDamier = new Texture("atlases/atlas_test/carrebleu.png");
+        if(damier1.getSelection().first() == "Bleu neon"){
+            affichageDamier = new Texture("atlases/atlas_test/carrebleuneon.png");
         }
-        if(damier1.getSelection().first() == "Violet"){
-            affichageDamier = new Texture("atlases/atlas_test/carreviolet.png");
+        if(damier1.getSelection().first() == "Marron"){
+            affichageDamier = new Texture("atlases/atlas_test/carremarron.png");
         }
         
         if(damier1.getSelection().first() == "Gris"){
             affichageDamier = new Texture("atlases/atlas_test/carregris.png");
+        }
+        if(damier1.getSelection().first() == "Noir neon"){
+            affichageDamier = new Texture("atlases/atlas_test/carrenoirneon.png");
+        }
+        if(damier1.getSelection().first() == "Rouge"){
+            affichageDamier = new Texture("atlases/atlas_test/carrerouge.png");
         }
          
     }
@@ -161,15 +178,21 @@ public class Parametres implements Screen {
         if(damier2.getSelection().first() == "Blanc"){
             affichageDamier2 = new Texture("atlases/atlas_test/carreblanc.png");
         }
-        if(damier2.getSelection().first() == "Bleu"){
-            affichageDamier2 = new Texture("atlases/atlas_test/carrebleu.png");
+        if(damier2.getSelection().first() == "Bleu neon"){
+            affichageDamier2 = new Texture("atlases/atlas_test/carrebleuneon.png");
         }
-        if(damier2.getSelection().first() == "Violet"){
-            affichageDamier2 = new Texture("atlases/atlas_test/carreviolet.png");
+        if(damier2.getSelection().first() == "Marron"){
+            affichageDamier2 = new Texture("atlases/atlas_test/carremarron.png");
         }
         
         if(damier2.getSelection().first() == "Gris"){
             affichageDamier2 = new Texture("atlases/atlas_test/carregris.png");
+        }
+        if(damier2.getSelection().first() == "Noir neon"){
+            affichageDamier2 = new Texture("atlases/atlas_test/carrenoirneon.png");
+        }
+        if(damier2.getSelection().first() == "Rouge"){
+            affichageDamier2 = new Texture("atlases/atlas_test/carrerouge.png");
         }
          
     }
