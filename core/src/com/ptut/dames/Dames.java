@@ -10,6 +10,7 @@ import com.ptut.dames.screens.FirstPage;
 import com.ptut.dames.screens.GameScreen;
 import com.ptut.dames.screens.JouerIA;
 import com.ptut.dames.screens.JouerJoueur;
+import com.ptut.dames.screens.Parametres;
 import com.ptut.dames.screens.SelectGame;
 
 public class Dames extends Game {
@@ -27,9 +28,10 @@ public class Dames extends Game {
     public SelectGame selectgame;
     public JouerIA jouerIA;
     public JouerJoueur jouerjoueur;
+    public Parametres parametres;
     static boolean jouercontrejoueur = false;
     static boolean jouercontreIA = false;
-
+    
     
     
 
@@ -40,6 +42,7 @@ public class Dames extends Game {
         gamescreen = new GameScreen();
         firstpage = new FirstPage(this);
         selectgame = new SelectGame(this);
+        parametres = new Parametres(this);
 
         jouerIA = new JouerIA(this);
         jouerjoueur = new JouerJoueur(this);
