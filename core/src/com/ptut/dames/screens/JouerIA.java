@@ -22,6 +22,7 @@ import com.ptut.dames.Dames;
 import com.ptut.dames.model.Plateau;
 import static com.ptut.dames.screens.JouerIA.plateau;
 import static com.ptut.dames.screens.JouerJoueur.nomJ1;
+import static com.ptut.dames.screens.Parametres.damier1;
 
 /**
  *
@@ -43,7 +44,8 @@ public class JouerIA implements Screen {
     TextButton menu;
     TextButton play;
     static Plateau plateau;
-
+    Texture apercu1;
+    Texture apercu2;
     
             
     public JouerIA(Dames app){
@@ -67,8 +69,8 @@ public class JouerIA implements Screen {
         menu = new TextButton("<<", skinneon);
         play = new TextButton("Jouer", skinneon);
         String[] diffi = new String[]{"Facile","Moyen", "Difficile"};
-        String[] choixTexture = new String[]{"Bleu", "Rouge", "Vert"};
-        String[] choixTexture2 = new String[]{"Rouge", "Bleu", "Vert"};
+        String[] choixTexture = new String[]{"Bleu", "Rouge", "Vert", "Gris et Rouge", "Gris et Violet"};
+        String[] choixTexture2 = new String[]{"Rouge", "Bleu", "Vert", "Gris et Rouge", "Gris et Violet"};
         
         
         diff = new SelectBox(skinneon);
@@ -129,9 +131,12 @@ public class JouerIA implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
+        apercu();
+        apercu2();
         batch.begin();
             batch.draw(backg,0,0);
+            batch.draw(apercu1, 620, 405, 40, 40);
+            batch.draw(apercu2, 620, 300, 40, 40);
         batch.end();
         stage.act();
         stage.draw();
@@ -183,6 +188,23 @@ public class JouerIA implements Screen {
      public static Plateau getPlateau() {
         return plateau;
     }
+     
+     public void apercu(){
+        if(choixcouleur.getSelection().first().equals("Bleu")) apercu1=new Texture("atlases/atlas_test/pionbleu.png");
+        if(choixcouleur.getSelection().first().equals("Vert")) apercu1=new Texture("atlases/atlas_test/pionvert.png");
+        if(choixcouleur.getSelection().first().equals("Rouge")) apercu1=new Texture("atlases/atlas_test/pionrouge.png");
+        if(choixcouleur.getSelection().first().equals("Gris et Violet")) apercu1=new Texture("atlases/atlas_test/pionvioletgris.png");
+        if(choixcouleur.getSelection().first().equals("Gris et Rouge")) apercu1=new Texture("atlases/atlas_test/piongrisrouge.png");
+     }
+     
+     public void apercu2(){
+        if(choixcouleur2.getSelection().first().equals("Bleu")) apercu2=new Texture("atlases/atlas_test/pionbleu.png");
+        if(choixcouleur2.getSelection().first().equals("Vert")) apercu2=new Texture("atlases/atlas_test/pionvert.png");
+        if(choixcouleur2.getSelection().first().equals("Rouge")) apercu2=new Texture("atlases/atlas_test/pionrouge.png");
+        if(choixcouleur2.getSelection().first().equals("Gris et Violet")) apercu2=new Texture("atlases/atlas_test/pionvioletgris.png");
+        if(choixcouleur2.getSelection().first().equals("Gris et Rouge")) apercu2=new Texture("atlases/atlas_test/piongrisrouge.png");
+     
+     }
  }
 
 

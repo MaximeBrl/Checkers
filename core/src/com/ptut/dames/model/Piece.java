@@ -36,6 +36,9 @@ public class Piece extends Actor {
         if(regionName.equals("Bleu")) regionName="pionbleu";
         if(regionName.equals("Vert")) regionName="pionvert";
         if(regionName.equals("Rouge")) regionName="pionrouge";
+        if(regionName.equals("Gris et Rouge")) regionName="piongrisrouge";
+        if(regionName.equals("Gris et Violet")) regionName="pionvioletgris";
+        
         this.textureRegion = Assets.gameAtlas.findRegion(regionName);
        
     }
