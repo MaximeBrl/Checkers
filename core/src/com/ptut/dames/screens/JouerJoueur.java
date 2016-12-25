@@ -43,6 +43,8 @@ public class JouerJoueur implements Screen {
     static SelectBox choixcouleur2;
     String[] choixTexture;
     String[] choixTexture2;
+    Texture apercu1;
+    Texture apercu2;
     
  
             
@@ -67,8 +69,8 @@ public class JouerJoueur implements Screen {
         menu = new TextButton("<<", skinneon);
         play = new TextButton("Jouer", skinneon);
         
-        choixTexture = new String[]{"Bleu", "Rouge", "Vert"};
-        choixTexture2 = new String[]{"Rouge", "Bleu", "Vert"};
+        String[] choixTexture = new String[]{"Bleu", "Rouge", "Vert", "Coeur gris", "Coeur rouge", "Etoile bleu","Etoile jaune", "Etoile rouge"};
+        String[] choixTexture2 = new String[]{"Rouge", "Bleu", "Vert", "Coeur gris", "Coeur rouge", "Etoile bleu","Etoile jaune", "Etoile rouge"};
         
         choixcouleur = new SelectBox(skinneon);
         choixcouleur.setItems(choixTexture);
@@ -125,9 +127,13 @@ public class JouerJoueur implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        apercu();
+        apercu2();
         
         batch.begin();
             batch.draw(backg,0,0);
+            batch.draw(apercu1, 620, 375, 40, 40);
+            batch.draw(apercu2, 620, 280, 40, 40);
         batch.end();
         stage.act();
         stage.draw();
@@ -174,6 +180,30 @@ public class JouerJoueur implements Screen {
     public static String getnomJ2(){
        return nomJ2.getText();
     }
+    
+    public void apercu(){ 
+        if(choixcouleur.getSelection().first().equals("Bleu")) apercu1=new Texture("atlases/atlas_test/pionbleu.png");
+        if(choixcouleur.getSelection().first().equals("Vert")) apercu1=new Texture("atlases/atlas_test/pionvert.png");
+        if(choixcouleur.getSelection().first().equals("Rouge")) apercu1=new Texture("atlases/atlas_test/pionrouge.png");
+        if(choixcouleur.getSelection().first().equals("Coeur gris")) apercu1=new Texture("atlases/atlas_test/pioncoeurgris.png");
+        if(choixcouleur.getSelection().first().equals("Coeur rouge")) apercu1=new Texture("atlases/atlas_test/pioncoeurrouge.png");
+        if(choixcouleur.getSelection().first().equals("Etoile bleu")) apercu1=new Texture("atlases/atlas_test/pionetoilebleu.png");
+        if(choixcouleur.getSelection().first().equals("Etoile jaune")) apercu1=new Texture("atlases/atlas_test/pionetoilejaune.png");
+        if(choixcouleur.getSelection().first().equals("Etoile rouge")) apercu1=new Texture("atlases/atlas_test/pionetoilerouge.png");
+     
+     }
+     
+     public void apercu2(){
+        if(choixcouleur2.getSelection().first().equals("Bleu")) apercu2=new Texture("atlases/atlas_test/pionbleu.png");
+        if(choixcouleur2.getSelection().first().equals("Vert")) apercu2=new Texture("atlases/atlas_test/pionvert.png");
+        if(choixcouleur2.getSelection().first().equals("Rouge")) apercu2=new Texture("atlases/atlas_test/pionrouge.png");
+        if(choixcouleur2.getSelection().first().equals("Coeur gris")) apercu2=new Texture("atlases/atlas_test/pioncoeurgris.png");
+        if(choixcouleur2.getSelection().first().equals("Coeur rouge")) apercu2=new Texture("atlases/atlas_test/pioncoeurrouge.png");
+        if(choixcouleur2.getSelection().first().equals("Etoile bleu")) apercu2=new Texture("atlases/atlas_test/pionetoilebleu.png");
+        if(choixcouleur2.getSelection().first().equals("Etoile jaune")) apercu2=new Texture("atlases/atlas_test/pionetoilejaune.png");
+        if(choixcouleur2.getSelection().first().equals("Etoile rouge")) apercu2=new Texture("atlases/atlas_test/pionetoilerouge.png");
+     
+     }
 }
 
 

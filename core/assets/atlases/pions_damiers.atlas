@@ -24,7 +24,7 @@ carreblanc
   orig: 64, 64
   offset: 0, 0
   index: -1
-pionvert
+piongrisrouge
   rotate: false
   xy: 65, 1
   size: 62, 60
@@ -38,11 +38,11 @@ carreblancsurbri
   orig: 64, 64
   offset: 0, 0
   index: -1
-pionrouge
+pionvert
   rotate: false
   xy: 129, 1
-  size: 60, 60
-  orig: 60, 60
+  size: 62, 60
+  orig: 62, 60
   offset: 0, 0
   index: -1
 carrebleuneon
@@ -52,11 +52,25 @@ carrebleuneon
   orig: 64, 64
   offset: 0, 0
   index: -1
+pionvioletgris
+  rotate: false
+  xy: 193, 1
+  size: 62, 60
+  orig: 62, 60
+  offset: 0, 0
+  index: -1
 carregris
   rotate: false
   xy: 265, 63
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+pionrouge
+  rotate: false
+  xy: 257, 1
+  size: 60, 60
+  orig: 60, 60
   offset: 0, 0
   index: -1
 carregrissurbri

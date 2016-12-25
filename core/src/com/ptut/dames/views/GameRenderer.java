@@ -36,7 +36,7 @@ public class GameRenderer implements Renderer {
          multiplexer= new InputMultiplexer();
          camera=new OrthographicCamera();
         stage2 = new Stage();
-        stage2.getViewport().setCamera(camera);
+        
         skinneon = new Skin(Gdx.files.internal("neonui/neonui/neon-ui.json" ));
          menu = new TextButton("menu", skinneon);
          menu.setPosition(10,10);
@@ -77,6 +77,7 @@ public class GameRenderer implements Renderer {
     @Override
     public void dispose() {
         this.stage.dispose();
+       stage2.dispose();
     }
 
 }

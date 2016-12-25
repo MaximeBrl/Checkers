@@ -173,6 +173,28 @@ public class SelectGame implements Screen {
 
             }
         });
+        
+        
+        credit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+                Dialog dialog;
+                dialog = new Dialog(" ", new Skin(Gdx.files.internal("visui/uiskin.json"))) {
+
+                    {
+
+                        text("Projet tuteuré réalisé à L'IUT Informatique Lyon1. \nAuteur : Jeremy Montrobert \nMaxime Borel\nSimon Raschetti\nVincent Rossero\nTuteur : Vincent Vidal");
+                       
+                        button("Retour au jeu");
+                    }
+
+
+                }.show(stage);
+
+                }});
+        
+
 
         jouerJoueur.addListener(new ClickListener() {
             @Override

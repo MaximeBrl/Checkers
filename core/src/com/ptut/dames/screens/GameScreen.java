@@ -1,4 +1,3 @@
-
 package com.ptut.dames.screens;
 
 /**
@@ -6,6 +5,7 @@ package com.ptut.dames.screens;
  * @author Jérémy Montrobert
  */
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,59 +21,55 @@ public class GameScreen implements Screen {
     private GameRenderer renderer;
     public static String couleur1, couleur2, nom1, nom2;
     Stage stage;
-     Skin skinneon;
-     OrthographicCamera camera;
-     TextButton menu;
-     
-   
-     public GameScreen(){
-         stage = new Stage();
-          skinneon = new Skin(Gdx.files.internal("neonui/neonui/neon-ui.json" ));
+    Skin skinneon;
+    OrthographicCamera camera;
+    TextButton menu;
+    InputMultiplexer multiplexer;
+
+    public GameScreen() {
+        stage = new Stage();
+        skinneon = new Skin(Gdx.files.internal("neonui/neonui/neon-ui.json"));
         menu = new TextButton("menu", skinneon);
-        camera=new OrthographicCamera();
-         stage.getViewport().setCamera(camera);
-        
-     }
+        camera = new OrthographicCamera();
+        stage.getViewport().setCamera(camera);
+        multiplexer = new InputMultiplexer();
+
+    }
 
     @Override
     public void render(float delta) {
-       
+
         this.renderer.render(delta);
         stage.act();
         stage.draw();
-        
-        
+
     }
 
     @Override
     public void resize(int width, int height) {
-     
+
         this.renderer.setSize(width, height);
-            
-       
-        
+
     }
 
     @Override
     public void show() {
-         Gdx.input.setInputProcessor(stage);
+        multiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(multiplexer);
         Plateau plateau;
         ControlPlateau controller;
-        
-       
-        
+
         Assets.loadGame();
-   
+
         plateau = new Plateau();
         plateau.ajoutPions();
-         controller= new ControlPlateau(plateau);
-         
-          this.renderer = new GameRenderer(plateau, controller);
+        controller = new ControlPlateau(plateau);
+
+        this.renderer = new GameRenderer(plateau, controller);
         this.renderer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        menu.setPosition(850,550);
+        menu.setPosition(850, 550);
         stage.addActor(menu);
-        
-        
+
     }
 
     @Override
@@ -92,7 +88,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        
-    } 
+
+    }
 
 }
