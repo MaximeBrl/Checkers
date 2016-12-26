@@ -36,7 +36,7 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
 
     private void deplacerPiece(Piece piece, int x, int y) {
         /* vérifier validitée du déplacement */
- /*if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
+        /*if ((piece == null) || !this.plateau.getTilePos(x, y).estEnSurbrillance) {
             return;
         }*/
         System.out.println("piece move1");
@@ -44,12 +44,12 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         int yOld = (int) piece.getY();
         System.out.println("piece move2");
         /* enlever la surbrillance */
- /* this.enleverSurbrillanceDeplacement();
+        /*this.enleverSurbrillanceDeplacement();
 
         /* Pièce mangée */
- /* if (this.plateau.getPiecePos(x, y) != null) {
+ /*if (this.plateau.getPiecePos(x, y) != null) {
             this.plateau.enleverPiece(x, y);
-        }*/
+        }
 
  /* Pièce déplacée */
         this.plateau.repositionnerPiece(xOld, yOld, x, y);
@@ -185,12 +185,9 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
             Piece piece = pieces[tx][ty]; // on transforme l'acteur en Pièce
             this.selectPiece(piece);
             select = true;
-            
-            if (select = true) {
-                 
+        } else if (this.plateau.pieceSelect != null) {
+
             this.deplacerPiece(this.plateau.pieceSelect, (int) Cx, (int) Cy);
-                    
-            }
 
         }
 
@@ -212,7 +209,8 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         return true;
     }
 
-    /* public float ConvertCoord() {
+    
+        /* public float ConvertCoord() {
         int i = 0;
         int x = 0;                  //la coordonée entière X de la case
         int y = 0;                  //la coordonée entière Y de la case
@@ -271,18 +269,20 @@ public class ControlPlateau extends ActorGestureListener implements GestureListe
         return true;
 
     }*/
-    @Override
-    public boolean longPress(float x, float y) {
+        @Override
+        public boolean longPress
+        (float x, float y
+        
+            ) {
         return false;
 
-    }
-
-    /* -detecter case cliquée, récupérer coordonées
+        }
+        /* -detecter case cliquée, récupérer coordonées
        -verifier si il y a une pièce sur la case
        -select
        -nouveau clic, recupérer coord
        -déplacer sur case cliquée
-     */
+         */
     public void ConvertCoord(float x, float y) {
 
     }
